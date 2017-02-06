@@ -15,19 +15,9 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails"               # Test suite for rails
-  gem "factory_girl_rails"        # Tes data generator
+  gem 'rspec-rails'               # Test suite for rails
+  gem 'factory_girl_rails'        # Tes data generator
   gem 'ffaker'                    # Mock data generator
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'devise'
