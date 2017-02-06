@@ -14,6 +14,12 @@ group :development do
   gem 'sqlite3'                   # Use sqlite3 as the database for Active Record
 end
 
+group :test do
+  gem "rspec-rails"               # Test suite for rails
+  gem "factory_girl_rails"        # Tes data generator
+  gem 'ffaker'                    # Mock data generator
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
