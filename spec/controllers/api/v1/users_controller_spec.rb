@@ -16,4 +16,39 @@ describe Api::V1::UsersController do
 
     it { should respond_with 200 }
   end
+
+  describe 'POST #create user' do
+    context 'when user is successfully created' do
+      before(:each) do
+        @user_attributes = FactoryGirl.attributes_for :user
+        post :create, { user: @user_attributes }, format: :json
+      end
+
+      it 'renders the json representation for the user record just created' do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:email]).to eql @user_attributes[:email]
+      end
+
+      it { should respond_with 201 }
+    end
+
+    context 'when user is not created' do
+      before(:each) do
+        @invalid_user_attributes = { password: '12345678', password_confirmation: '12345678' }
+        post :create, { user: @invalid_user_attributes }, format: :json
+      end
+
+      it 'renders an error' do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response).to have_key(:error)
+      end
+
+      it 'render error reason' do
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:error][:email]).to include "can't be blank"
+      end
+
+      it { should respond_with 422 }
+    end
+  end
 end
