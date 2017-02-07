@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  respond_to :html,:json
+  respond_to :html, :json
 
   def show
     respond_with User.find(params[:id])
