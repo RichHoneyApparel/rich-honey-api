@@ -39,6 +39,11 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    user_params = params.require(:user).permit(:email, :password, :password_confirmation)
+
+    user_params.delete(:password) unless user_params[:password].present?
+    user_params.delete(:password_confirmation) unless user_params[:password_confirmation].present?
+
+    user_params
   end
 end

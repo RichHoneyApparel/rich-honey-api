@@ -9,9 +9,8 @@ class User < ActiveRecord::Base
   before_create :generate_authentication_token!
 
   def generate_authentication_token!
-    loop do
+    begin
       self.auth_token = Devise.friendly_token
-      break if !self.class.exists?(auth_token: auth_token)
-    end
+    end while self.class.exists?(auth_token: auth_token)
   end
 end
