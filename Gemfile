@@ -12,6 +12,11 @@ end
 
 group :development do
   gem 'sqlite3'                                       # Use sqlite3 as the database for Active Record
+
+  # Guard Gem
+  gem 'guard'
+  gem 'guard-livereload', '~> 2.5', require: false
+  gem 'rack-livereload', group: :development
 end
 
 group :test do
