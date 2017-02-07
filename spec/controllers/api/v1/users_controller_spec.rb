@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 describe Api::V1::UsersController do
-  before(:each) { request.headers['Accept'] = 'application/vnd.rich-honey-api.v1' }
-
+  
   describe 'GET #show' do
     before(:each) do
       @user = FactoryGirl.create :user
@@ -21,7 +20,7 @@ describe Api::V1::UsersController do
     context 'when user is successfully created' do
       before(:each) do
         @user_attributes = FactoryGirl.attributes_for :user
-        post :create, { user: @user_attributes }, format: :json
+        post :create, { user: @user_attributes }
       end
 
       it 'renders the json representation for the user record just created' do
@@ -35,7 +34,7 @@ describe Api::V1::UsersController do
     context 'when user is not created' do
       before(:each) do
         @invalid_user_attributes = { password: '12345678', password_confirmation: '12345678' }
-        post :create, { user: @invalid_user_attributes }, format: :json
+        post :create, { user: @invalid_user_attributes }
       end
 
       it 'renders an error' do
@@ -56,7 +55,7 @@ describe Api::V1::UsersController do
     context 'when user is successfully created' do
       before(:each) do
         @user_attributes = FactoryGirl.attributes_for :user
-        post :create, { user: @user_attributes }, format: :json
+        post :create, { user: @user_attributes }
       end
 
       it 'renders the json representation for the user record just created' do
@@ -70,7 +69,7 @@ describe Api::V1::UsersController do
     context 'when user is not created' do
       before(:each) do
         @invalid_user_attributes = { password: '12345678', password_confirmation: '12345678' }
-        post :create, { user: @invalid_user_attributes }, format: :json
+        post :create, { user: @invalid_user_attributes }
       end
 
       it 'renders an error' do
@@ -90,7 +89,7 @@ describe Api::V1::UsersController do
   describe 'DELETE #destroy user' do
     before(:each) do
       @user = FactoryGirl.create :user
-      delete :destroy, { id: @user.id }, format: :json
+      delete :destroy, { id: @user.id }
     end
 
     it { should respond_with 204 }
