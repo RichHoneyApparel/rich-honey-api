@@ -6,7 +6,7 @@ RichHoneyApi::Application.routes.draw do
                               constraints: { subdomain: 'api' }, path: '/'  do
     scope module: :v1,
               constraints: ApiConstraints.new(version: 1, default: true) do
-      resources :users, only: [:show, :create, :update, :destroy]
+      resources :users, only: [:index, :show, :create, :update, :destroy]
       # destroy should be changed to archived. In the mean time, have it as destroy
       resources :sessions, only: [:create, :destroy]
     end

@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 describe Api::V1::UsersController do
+  describe 'Get all users' do
+    before(:each) do
+      @users = FactoryGirl.create_list(:user, 10)
+      get :index, format: :json
+    end
+
+    it 'returns all the users' do
+      expect(@users.length).to_not eq(0)
+    end
+  end
 
   describe 'GET #show' do
     before(:each) do
