@@ -12,7 +12,7 @@ class Api::V1::ProductsController < ApplicationController
   def create
     product = Product.create(product_params)
 
-    if product.save && product.product_property.save
+    if product.save
       render json: product, include: %w(product_property product_production_statuses), status: 201, location: [:api, product]
     else
       render json: { error: product.errors }, status: 422

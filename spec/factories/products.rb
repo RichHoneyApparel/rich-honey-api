@@ -1,15 +1,15 @@
 FactoryGirl.define do
   factory :product_property do
-    gender ['men', 'women', 'n/a']
-    categories ['custom', 'activewear', 'accessories']
-    dyes ['oil' ,'reactive', 'pigment']
-    washes ['softener_enzyme', 'silicone', 'hot_wash', 'power_wash']
-    fabrics ['cotton20', 'cotton30', 'cotton40', 'cotton_slub', 'french_terry', 'french_terry_slub', 'triblend']
+    gender { FFaker::Name.name }
+    category { FFaker::Name.name }
+    dye { FFaker::Name.name }
+    wash { FFaker::Name.name }
+    fabric { FFaker::Name.name }
   end
 
   factory :product_production_status do
     name { FFaker::Name.name }
-    description { FFaker::Book.description }
+    description { FFaker::Company.catch_phrase }
     state 'current'
   end
 
@@ -17,7 +17,7 @@ FactoryGirl.define do
     name { FFaker::Name.name }
     qty { rand(1..130) }
     price { rand(0.25..2000) }
-    product_production_status { create_list(:product_production_status, 3) }
+    product_production_statuses { create_list(:product_production_status, 3) }
     product_property { create(:product_property) }
   end
 end

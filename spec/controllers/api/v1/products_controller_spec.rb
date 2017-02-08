@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Api::V1::ProductsController do
-  describe 'Get all produdcts' do
+  describe 'Get all products' do
     before(:each) do
       @products = FactoryGirl.create_list(:product, 20)
       get :index, format: :json
