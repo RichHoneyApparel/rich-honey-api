@@ -11,7 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207063724) do
+ActiveRecord::Schema.define(version: 20170208001106) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "product_production_statuses", force: true do |t|
+    t.integer  "product_id"
+    t.string   "name"
+    t.text     "description"
+    t.text     "state",       default: [], array: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "product_production_statuses", ["product_id"], name: "index_product_production_statuses_on_product_id", using: :btree
+
+  create_table "product_properties", force: true do |t|
+    t.integer  "product_id"
+    t.text     "gender",     default: [], array: true
+    t.text     "categories", default: [], array: true
+    t.text     "dyes",       default: [], array: true
+    t.text     "washes",     default: [], array: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "fabrics",    default: [], array: true
+  end
+
+  add_index "product_properties", ["product_id"], name: "index_product_properties_on_product_id", using: :btree
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.integer  "qty",        default: 0,   null: false
+    t.decimal  "price",      default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -29,8 +64,8 @@ ActiveRecord::Schema.define(version: 20170207063724) do
     t.string   "auth_token",             default: ""
   end
 
-  add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

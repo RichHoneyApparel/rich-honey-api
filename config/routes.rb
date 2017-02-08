@@ -9,6 +9,7 @@ RichHoneyApi::Application.routes.draw do
       resources :users, only: [:index, :show, :create, :update, :destroy]
       # destroy should be changed to archived. In the mean time, have it as destroy
       resources :sessions, only: [:create, :destroy]
+      resources :products, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end
