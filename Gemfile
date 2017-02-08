@@ -11,7 +11,7 @@ group :doc do
 end
 
 group :development do
-  gem 'sqlite3'                                       # Use sqlite3 as the database for Active Record
+  gem 'pg'                                       # Use postgresql as the database for Active Record
 
   # Guard Gem
   gem 'guard'
