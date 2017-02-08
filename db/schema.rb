@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208001106) do
+ActiveRecord::Schema.define(version: 20170208224112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20170208001106) do
   create_table "product_production_statuses", force: true do |t|
     t.integer  "product_id"
     t.string   "name"
-    t.text     "description"
-    t.text     "state",       default: [], array: true
+    t.string   "description"
+    t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,20 +29,20 @@ ActiveRecord::Schema.define(version: 20170208001106) do
 
   create_table "product_properties", force: true do |t|
     t.integer  "product_id"
-    t.text     "gender",     default: [], array: true
-    t.text     "categories", default: [], array: true
-    t.text     "dyes",       default: [], array: true
-    t.text     "washes",     default: [], array: true
+    t.string   "gender"
+    t.string   "category"
+    t.string   "dye"
+    t.string   "wash"
+    t.string   "fabric"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "fabrics",    default: [], array: true
   end
 
   add_index "product_properties", ["product_id"], name: "index_product_properties_on_product_id", using: :btree
 
   create_table "products", force: true do |t|
     t.string   "name"
-    t.integer  "qty",        default: 0,   null: false
+    t.integer  "qty"
     t.decimal  "price",      default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"

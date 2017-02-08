@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :product_property do
     gender ['men', 'women', 'n/a']
     categories ['custom', 'activewear', 'accessories']
-    dyes ['oil' ,'reactive', 'pigmet']
+    dyes ['oil' ,'reactive', 'pigment']
     washes ['softener_enzyme', 'silicone', 'hot_wash', 'power_wash']
     fabrics ['cotton20', 'cotton30', 'cotton40', 'cotton_slub', 'french_terry', 'french_terry_slub', 'triblend']
   end
