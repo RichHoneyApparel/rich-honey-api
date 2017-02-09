@@ -8,6 +8,10 @@ gem 'uglifier', '>= 1.3.0'                            # Use Uglifier as compress
 gem 'coffee-rails', '~> 4.0.0'                        # Use CoffeeScript for .js.coffee assets and views
 gem 'jquery-rails'                                    # Use jquery as the JavaScript library
 gem 'active_model_serializers'                        # Serialize data that we're exposing
+gem 'sidekiq'                                         # Asynchronous job handling
+gem 'sidekiq-scheduler', '~> 2.0'                     # Schedule recurring jobs
+gem 'sidekiq-status'                                  # Addon to Sidekiq to cancel jobs, etc.
+
 
 group :doc do
   gem 'sdoc', require: false                          # bundle exec rake doc:rails generates the API under doc/api.
@@ -27,4 +31,7 @@ group :test do
   gem 'shoulda-matchers', '>= 3.0.0', require: false  # Test matchers
 end
 
+group :production do
+  gem 'puma'                                          # Deployment server framework
+end
 gem 'devise'
