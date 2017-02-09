@@ -29,4 +29,5 @@ gem 'devise'
 
 group :production, :test, :development do
   gem 'pg'                                            # Use postgresql as the database for Active Record
+  gem 'turbolinks'
 end
