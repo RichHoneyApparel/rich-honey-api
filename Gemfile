@@ -6,13 +6,13 @@ gem 'uglifier', '>= 1.3.0'                            # Use Uglifier as compress
 gem 'coffee-rails', '~> 4.0.0'                        # Use CoffeeScript for .js.coffee assets and views
 gem 'jquery-rails'                                    # Use jquery as the JavaScript library
 gem 'active_model_serializers'                        # Serialize data that we're exposing
+gem 'pg'                                              # Use postgresql as the database for Active Record
+
 group :doc do
   gem 'sdoc', require: false                          # bundle exec rake doc:rails generates the API under doc/api.
 end
 
 group :development do
-  gem 'pg'                                       # Use postgresql as the database for Active Record
-
   # Guard Gem
   gem 'guard'
   gem 'guard-livereload', '~> 2.5', require: false
