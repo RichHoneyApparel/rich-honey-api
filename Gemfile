@@ -26,4 +26,7 @@ group :test do
 end
 
 gem 'devise'
-gem 'pg'                                              # Use postgresql as the database for Active Record
+
+group :production, :test, :development do
+  gem 'pg'                                            # Use postgresql as the database for Active Record
+end
