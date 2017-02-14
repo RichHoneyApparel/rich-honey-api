@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 require 'devise'
+require 'rack'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -21,6 +22,14 @@ module RichHoneyApi
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+        allowed_origins = %w(http://localhost:3000) if Rails.env.development?
+      end
+    end
+
     config.generators do |g|
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
@@ -30,6 +39,11 @@ module RichHoneyApi
       g.javascripts = false
       g.helper = false
     end
+
+    config.to_prepare do
+      DeviseController.respond_to :html, :json
+    end
+    
     config.autoload_paths += %W(\#{config.root}/lib)
     config.assets.initialize_on_precompile = false
   end
