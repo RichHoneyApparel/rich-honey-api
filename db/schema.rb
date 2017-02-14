@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208233825) do
+ActiveRecord::Schema.define(version: 20170214224046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "product_images", force: true do |t|
+    t.integer  "product_id"
+    t.string   "src"
+    t.string   "alt"
+    t.boolean  "featured"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "product_images", ["product_id"], name: "index_product_images_on_product_id", using: :btree
 
   create_table "product_production_statuses", force: true do |t|
     t.integer  "product_id"
