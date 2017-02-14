@@ -11,13 +11,8 @@ class User < ActiveRecord::Base
   validates :auth_token, uniqueness: true
 
   before_create :generate_authentication_token!
-  after_create :send_admin_mail
 
   accepts_nested_attributes_for :business, :address
-
-  def send_admin_mail
-    NewUserMailer.send_new_user_message(self).deliver
-  end
 
   def generate_authentication_token!
     begin
