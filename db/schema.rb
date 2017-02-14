@@ -11,10 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208233825) do
+ActiveRecord::Schema.define(version: 20170213213137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: true do |t|
+    t.integer  "user_id"
+    t.text     "address_1"
+    t.text     "address_2"
+    t.string   "state"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
+
+  create_table "businesses", force: true do |t|
+    t.integer  "user_id"
+    t.string   "business_email"
+    t.string   "business_name"
+    t.string   "business_url"
+    t.string   "business_phone"
+    t.string   "business_fax"
+    t.string   "business_federal_tax_id"
+    t.string   "business_state_sales_tax_license"
+    t.string   "garment_decorated"
+    t.string   "product_decorated"
+    t.string   "product_resold"
+    t.text     "business_type"
+    t.string   "heard_about_us"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "businesses", ["user_id"], name: "index_businesses_on_user_id", using: :btree
 
   create_table "product_production_statuses", force: true do |t|
     t.integer  "product_id"
@@ -49,19 +83,25 @@ ActiveRecord::Schema.define(version: 20170208233825) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "auth_token",             default: ""
+    t.string   "first_name"
+    t.string   "last_name"
+    t.boolean  "admin",                  default: false
+    t.boolean  "approved",               default: false
+    t.string   "phone"
+    t.string   "username"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree

@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with User.all
+    respond_with User.all, include: %w(business address)
   end
 
   def show
@@ -39,7 +39,13 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    user_params = params.require(:user).permit(:email, :password, :password_confirmation)
+    user_params = params.require(:user).permit(:email, :password, :password_confirmation,
+                  :first_name, :last_name, :phone, :username,
+                  business_attributes: [:id, :business_name,
+                    :business_type, :business_email, :business_url, :business_phone,
+                    :business_fax, :heard_about_us, :federal_tax_id, :state_sales_tax_license,
+                    :product_resold, :product_decorated, :garment_decorated,
+                    ], address_attributes: [:address_1, :address_2, :state, :country, :city, :zip])
 
     user_params.delete(:password) unless user_params[:password].present?
     user_params.delete(:password_confirmation) unless user_params[:password_confirmation].present?
