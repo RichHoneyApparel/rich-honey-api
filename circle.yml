@@ -1,0 +1,24 @@
+deployment:
+  staging:
+    branch: develop
+    commands:
+      - bundle install
+      - heroku run rake deploy:start --app alpha-rh-private-label-api
+      - heroku maintenance:on --app alpha-rh-private-label-api
+      - heroku scale worker=0 --app alpha-rh-private-label-api
+      - heroku run rake db:migrate --app alpha-rh-private-label-api
+      - heroku scale worker=1 --app alpha-rh-private-label-api
+      - heroku maintenance:off --app alpha-rh-private-label-api
+      - heroku run rake deploy:finished --app alpha-rh-private-label-api
+
+  production:
+    branch: master
+    commands:
+      - bundle install
+      - heroku run rake deploy:start --app rh-private-label-api
+      - heroku maintenance:on --app rh-private-label-api
+      - heroku scale worker=0 --app rh-private-label-api
+      - heroku run rake db:migrate --app rh-private-label-api
+      - heroku scale worker=1 --app rh-private-label-api
+      - heroku maintenance:off --app rh-private-label-api
+      - heroku run rake deploy:finished --app rh-private-label-api
