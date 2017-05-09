@@ -24,6 +24,8 @@ gem 'active_model_serializers' # Serialize what the API returns, and gives us th
 # gem 'capistrano-rails', group: :development
 
 gem 'rack-cors' # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+gem 'rack-attack' # Rate Limiting and throttling
+gem 'devise_token_auth' # Devise token authentication for users
 
 group :development, :test do
   gem 'rspec-rails', '>= 3.5.0' # Use RSpec for specs
