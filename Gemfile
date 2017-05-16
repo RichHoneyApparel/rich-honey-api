@@ -11,7 +11,7 @@ gem 'active_model_serializers'                        # Serialize data that we'r
 gem 'sidekiq'                                         # Asynchronous job handling
 gem 'sidekiq-scheduler', '~> 2.0'                     # Schedule recurring jobs
 gem 'sidekiq-status'                                  # Addon to Sidekiq to cancel jobs, etc.
-
+gem 'rack-cors', :require => 'rack/cors'
 
 group :doc do
   gem 'sdoc', require: false                          # bundle exec rake doc:rails generates the API under doc/api.
