@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208233825) do
+ActiveRecord::Schema.define(version: 20170516193943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "hangtags", force: true do |t|
+    t.integer "quote_id"
+    t.boolean "placement", default: false
+    t.boolean "creation",  default: false
+  end
+
+  add_index "hangtags", ["quote_id"], name: "index_hangtags_on_quote_id", using: :btree
+
+  create_table "labels", force: true do |t|
+    t.integer "quote_id"
+    t.boolean "sewing",   default: false
+    t.boolean "creation", default: false
+  end
+
+  add_index "labels", ["quote_id"], name: "index_labels_on_quote_id", using: :btree
 
   create_table "product_production_statuses", force: true do |t|
     t.integer  "product_id"
@@ -47,6 +63,30 @@ ActiveRecord::Schema.define(version: 20170208233825) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "quotes", force: true do |t|
+    t.string   "product_name"
+    t.string   "product_style_num"
+    t.string   "fabric"
+    t.string   "color"
+    t.string   "dye"
+    t.integer  "qty",               default: 150
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "size_breakdowns", force: true do |t|
+    t.integer "quote_id"
+    t.integer "xs"
+    t.integer "s"
+    t.integer "m"
+    t.integer "l"
+    t.integer "xl"
+    t.integer "xxl"
+  end
+
+  add_index "size_breakdowns", ["quote_id"], name: "index_size_breakdowns_on_quote_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
