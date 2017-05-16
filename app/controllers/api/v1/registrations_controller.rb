@@ -14,4 +14,7 @@ class RegistrationsController < Devise::RegistrationsController
       params.require(resource_name).permit(allow)
     end
 
+    def after_sign_out_path_for(resource_or_scope)
+      render.json(:user)
+    end
 end

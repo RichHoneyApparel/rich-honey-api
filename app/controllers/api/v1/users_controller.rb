@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      render json: user, status: 201, location: [:api, user]
+      render json: user, include: %w(business address), status: 201, location: [:api, user]
     else
       render json: { error: user.errors }, status: 422
     end
@@ -24,7 +24,7 @@ class Api::V1::UsersController < ApplicationController
     user = current_user
 
     if user.update(user_params)
-      render json: user, status: 201, location: [:api, user]
+      render json: user, include: %w(business address), status: 201, location: [:api, user]
     else
       render json: { errors: user.errors }, status: 422
     end
@@ -43,8 +43,8 @@ class Api::V1::UsersController < ApplicationController
                   :first_name, :last_name, :phone, :username,
                   business_attributes: [:id, :business_name,
                     :business_type, :business_email, :business_url, :business_phone,
-                    :business_fax, :heard_about_us, :federal_tax_id, :state_sales_tax_license,
-                    :product_resold, :product_decorated, :garment_decorated,
+                    :business_fax, :heard_about_us, :federal_tax_id, :business_federal_tax_id,
+                    :product_resold, :product_decorated, :garment_decorated, :business_state_sales_tax_license
                     ], address_attributes: [:address_1, :address_2, :state, :country, :city, :zip])
 
     user_params.delete(:password) unless user_params[:password].present?
