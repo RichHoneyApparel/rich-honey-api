@@ -22,7 +22,7 @@ class Api::V1::QuotesController < ApplicationController
 
   def quote_params
     params.require(:quote).permit(:product_name, :product_style_num, :qty,
-            :fabric, :color, :dye, :notes, size_breakdown_attributes: [
+            :fabric, :color, :dye, :note, :gender, size_breakdown_attributes: [
               :quote_id, :xs, :s, :m, :l, :xl, :xxl
             ], label_attributes: [:sewing, :creation], hangtag_attributes: [
               :placement, :creation

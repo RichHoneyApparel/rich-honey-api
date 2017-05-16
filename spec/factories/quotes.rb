@@ -26,6 +26,7 @@ FactoryGirl.define do
     dye 'MyString'
     qty 150
     note 'MyText'
+    gender 'Male'
     size_breakdown { create(:size_breakdown) }
     label { create(:label) }
     hangtag { create(:hangtag) }
